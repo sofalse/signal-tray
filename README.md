@@ -1,0 +1,11 @@
+# Signal tray
+
+This is a simple macOS tray application to track the signal strength of a `goform` compatible LTE/5G modem.
+
+You'll need:
+* Your modem IP (usually `192.168.0.1)
+* Auth token — taken from `_` query param from requests to the router's API (check network tab on the router admin page)
+* Auth cookie — token from `stok` cookie (similar as the one above, copy only the cookie value)
+
+AFAIK this should validate forever.
+I've done this as a personal tool, not really planning any active maintenance (unless it'll break for me too).
