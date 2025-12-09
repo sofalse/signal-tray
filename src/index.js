@@ -15,6 +15,8 @@ import {
   setAuthToken,
   setAuthCookie,
   setNotification,
+  setBatteryNotification,
+  setBatteryNotificationTriggered,
 } from "../util/settings.js";
 import { modemRequest } from "../util/axios.js";
 
@@ -46,11 +48,6 @@ const iconMap = {
 };
 
 function createWindow() {
-  if (settingsWindow !== null) {
-    settingsWindow.focus();
-    return;
-  }
-
   settingsWindow = new BrowserWindow({
     width: 300,
     height: 400,
