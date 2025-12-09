@@ -14,6 +14,7 @@ import {
   setNotification,
 } from "./settings.js";
 import { modemRequest } from "./util/axios.js";
+
 dayjs.extend(customParseFormat);
 
 let tray = null;
@@ -71,42 +72,6 @@ function createWindow() {
   });
 }
 
-function setupIpcHandlers() {
-  // Handle load-settings request from renderer
-  ipcMain.on("load-settings", (event) => {
-    const currentSettings = getSettings();
-    event.reply("settings-loaded", currentSettings);
-  });
-
-  // Handle save-settings from renderer
-  ipcMain.on("save-settings", (event, settingsData) => {
-    try {
-      if (settingsData.modemIp) {
-        setModemIp(settingsData.modemIp);
-      }
-      if (settingsData.authToken !== undefined) {
-        setAuthToken(settingsData.authToken);
-      }
-      if (settingsData.authCookie !== undefined) {
-        setAuthCookie(settingsData.authCookie);
-      }
-      // Refresh settings and restart main loop
-      settings = getSettings();
-      startMainLoop();
-      // Send confirmation back to renderer
-      event.reply("settings-saved", { success: true });
-    } catch (error) {
-      event.reply("settings-saved", { success: false, error: error.message });
-    }
-  });
-}
-
-function showSettingsWindow() {
-  if (settingsWindow !== null) {
-    settingsWindow.show();
-  }
-}
-
 function startMainLoop() {
   // Clear existing interval if it exists
   if (mainLoopInterval !== null) {
@@ -151,6 +116,42 @@ function startMainLoop() {
         }
       }
     }, settings.pingInterval);
+  }
+}
+
+function setupIpcHandlers() {
+  // Handle load-settings request from renderer
+  ipcMain.on("load-settings", (event) => {
+    const currentSettings = getSettings();
+    event.reply("settings-loaded", currentSettings);
+  });
+
+  // Handle save-settings from renderer
+  ipcMain.on("save-settings", (event, settingsData) => {
+    try {
+      if (settingsData.modemIp) {
+        setModemIp(settingsData.modemIp);
+      }
+      if (settingsData.authToken !== undefined) {
+        setAuthToken(settingsData.authToken);
+      }
+      if (settingsData.authCookie !== undefined) {
+        setAuthCookie(settingsData.authCookie);
+      }
+      // Refresh settings and restart main loop
+      settings = getSettings();
+      startMainLoop();
+      // Send confirmation back to renderer
+      event.reply("settings-saved", { success: true });
+    } catch (error) {
+      event.reply("settings-saved", { success: false, error: error.message });
+    }
+  });
+}
+
+function showSettingsWindow() {
+  if (settingsWindow !== null) {
+    settingsWindow.show();
   }
 }
 
