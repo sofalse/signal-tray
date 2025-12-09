@@ -15,8 +15,8 @@ import {
   setAuthToken,
   setAuthCookie,
   setNotification,
-} from "./settings.js";
-import { modemRequest } from "./util/axios.js";
+} from "../util/settings.js";
+import { modemRequest } from "../util/axios.js";
 
 dayjs.extend(customParseFormat);
 
@@ -29,12 +29,12 @@ let mainLoopInterval = null;
 
 let settingsWindow = null;
 
-const noReception = nativeImage.createFromPath(path.join(__dirname, "assets/icons/none.png"));
-const oneBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/1bar.png"));
-const twoBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/2bar.png"));
-const threeBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/3bar.png"));
-const fourBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/4bar.png"));
-const disabledIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/disabled.png"));
+const noReception = nativeImage.createFromPath(path.join(__dirname, "../assets/icons/none.png"));
+const oneBarIcon = nativeImage.createFromPath(path.join(__dirname, "../assets/icons/1bar.png"));
+const twoBarIcon = nativeImage.createFromPath(path.join(__dirname, "../assets/icons/2bar.png"));
+const threeBarIcon = nativeImage.createFromPath(path.join(__dirname, "../assets/icons/3bar.png"));
+const fourBarIcon = nativeImage.createFromPath(path.join(__dirname, "../assets/icons/4bar.png"));
+const disabledIcon = nativeImage.createFromPath(path.join(__dirname, "../assets/icons/disabled.png"));
 
 const iconMap = {
   0: noReception,
@@ -314,10 +314,4 @@ app.on("window-all-closed", () => {
     tray.destroy();
   }
   tray = null;
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
 });

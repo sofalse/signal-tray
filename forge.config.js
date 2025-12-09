@@ -9,6 +9,9 @@ export default {
     asar: true,
     icon: "./images/icon",
     appBundleId: "pl.mwisniewski.signal-tray",
+    plist: {
+      LSUIElement: true,
+    },
   },
   rebuildConfig: {},
   makers: [
