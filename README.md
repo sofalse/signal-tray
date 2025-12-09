@@ -1,5 +1,7 @@
 # Signal tray
 
+[![codecov](https://codecov.io/gh/michalwisniewski/signal-tray/branch/main/graph/badge.svg)](https://codecov.io/gh/michalwisniewski/signal-tray)
+
 This is a simple macOS tray application to track the signal strength of a `goform` compatible LTE/5G modem.
 
 You'll need:`

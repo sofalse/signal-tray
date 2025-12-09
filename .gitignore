@@ -13,3 +13,5 @@ node_modules/
 ./CONTRIBUTING.md
 ./CODE_OF_CONDUCT.md
 out/
+.DS_Store
+coverage/

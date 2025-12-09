@@ -1,15 +1,25 @@
-const { FusesPlugin } = require("@electron-forge/plugin-fuses");
-const { FuseV1Options, FuseVersion } = require("@electron/fuses");
+/* eslint-disable import/no-extraneous-dependencies */
 
-module.exports = {
+import { FusesPlugin } from "@electron-forge/plugin-fuses";
+import { FuseV1Options, FuseVersion } from "@electron/fuses";
+
+export default {
   packagerConfig: {
+    productName: "Signal Tray",
     asar: true,
+    icon: "./images/icon",
+    appBundleId: "pl.mwisniewski.signal-tray",
+    plist: {
+      LSUIElement: true,
+    },
   },
   rebuildConfig: {},
   makers: [
     {
       name: "@electron-forge/maker-squirrel",
-      config: {},
+      config: {
+        iconUrl: "./images/icon.ico",
+      },
     },
     {
       name: "@electron-forge/maker-zip",
@@ -17,11 +27,30 @@ module.exports = {
     },
     {
       name: "@electron-forge/maker-deb",
-      config: {},
+      config: {
+        config: {
+          options: {
+            icon: "./images/icon.png",
+          },
+        },
+      },
     },
     {
-      name: "@electron-forge/maker-rpm",
-      config: {},
+      name: "@electron-forge/maker-dmg",
+      config: {
+        icon: "./images/icon.icns",
+      },
+    },
+  ],
+  publishers: [
+    {
+      name: "@electron-forge/publisher-github",
+      config: {
+        repository: {
+          owner: "sofalse",
+          name: "signal-tray",
+        },
+      },
     },
   ],
   plugins: [

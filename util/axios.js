@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getSettings, setLastChecked, setLastSignal, setLastBattery } from "../settings.js";
+import { getSettings, setLastChecked, setLastSignal, setLastBattery } from "./settings.js";
 
 export const modemRequest = async () => {
   const { modemIp, authToken, authCookie } = getSettings();

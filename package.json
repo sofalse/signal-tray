@@ -1,13 +1,16 @@
 {
   "name": "signal-tray",
+  "productName": "Signal Tray",
   "version": "1.0.0",
   "description": "Tray application for showing cellular modem signal strength",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "make:self-signed": "electron-forge make --target=darwin -- --sign",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -28,6 +31,7 @@
   "devDependencies": {
     "@electron-forge/cli": "^7.10.2",
     "@electron-forge/maker-deb": "^7.10.2",
+    "@electron-forge/maker-dmg": "^7.10.2",
     "@electron-forge/maker-rpm": "^7.10.2",
     "@electron-forge/maker-squirrel": "^7.10.2",
     "@electron-forge/maker-zip": "^7.10.2",
@@ -35,6 +39,7 @@
     "@electron-forge/plugin-fuses": "^7.10.2",
     "@electron-forge/publisher-github": "^7.10.2",
     "@electron/fuses": "^1.8.0",
+    "@jest/globals": "^30.2.0",
     "electron": "^39.2.6",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -42,7 +47,17 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-n": "^17.23.1",
     "eslint-plugin-promise": "^7.2.1",
+    "jest": "^30.2.0",
     "prettier": "^3.7.4"
+  },
+  "overrides": {
+    "os": {
+      "darwin": {
+        "devDependencies": {
+          "appdmg": "^0.6.6"
+        }
+      }
+    }
   },
   "dependencies": {
     "axios": "1.13.2",
