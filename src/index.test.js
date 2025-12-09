@@ -1,7 +1,13 @@
 import { describe, it, expect, jest, beforeEach, afterEach } from "@jest/globals";
 
 // These will be imported in beforeEach after jest.resetModules()
-let app, Tray, Menu, BrowserWindow, Notification, ipcMain, nativeImage;
+let app;
+let Tray;
+let Menu;
+let BrowserWindow;
+let Notification;
+let ipcMain;
+let nativeImage;
 
 // Create mock instances
 const mockTray = {
@@ -25,7 +31,7 @@ const mockNotificationInstance = {
   show: jest.fn(),
 };
 
-const mockDayjs = jest.fn((date) => ({
+const mockDayjs = jest.fn(() => ({
   format: jest.fn(() => "12:00:00, Jan 1"),
 }));
 mockDayjs.extend = jest.fn();
@@ -73,7 +79,6 @@ jest.unstable_mockModule("url", () => ({
 describe("index.js", () => {
   let settings;
   let axiosModule;
-  let indexModule;
 
   beforeEach(async () => {
     jest.resetModules();
@@ -723,7 +728,8 @@ describe("index.js", () => {
         { signalbar: "5", expectedIconIndex: 4 }, // 5 maps to 4
       ];
 
-      for (const testCase of testCases) {
+      await testCases.reduce(async (previousPromise, testCase) => {
+        await previousPromise;
         jest.clearAllMocks();
         axiosModule.modemRequest.mockResolvedValue({
           signalbar: testCase.signalbar,
@@ -741,7 +747,7 @@ describe("index.js", () => {
         await Promise.resolve();
 
         expect(mockTray.setImage).toHaveBeenCalled();
-      }
+      }, Promise.resolve());
     });
   });
 
