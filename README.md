@@ -12,3 +12,5 @@ You'll need:`
 
 AFAIK this should validate forever.
 I've done this as a personal tool, not really planning any active maintenance (unless it'll break for me too).
+
+Tested and working on **ZTE U50**.

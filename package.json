@@ -1,7 +1,7 @@
 {
   "name": "signal-tray",
   "productName": "Signal Tray",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tray application for showing cellular modem signal strength",
   "main": "src/index.js",
   "scripts": {
