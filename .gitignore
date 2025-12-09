@@ -1,0 +1,15 @@
+node_modules/
+./dist
+./build
+./release
+./package-lock.json
+./yarn.lock
+./pnpm-lock.yaml
+./bun.lockb
+./package.json
+./README.md
+./LICENSE
+./CHANGELOG.md
+./CONTRIBUTING.md
+./CODE_OF_CONDUCT.md
+out/

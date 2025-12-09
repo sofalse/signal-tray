@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="settingsForm">
+        <div class="row">
+          <div class="col-12">
+            <h2>Modem Settings</h2>
+            <div class="row">
+              <div class="col-12">
+                <label for="modemIp">Modem IP</label>
+                <input type="text" id="modemIp" name="modemIp" value="192.168.0.1" required />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h2>Auth Settings</h2>
+            <div class="row">
+              <div class="col-12">
+                <label for="authToken">Auth token</label>
+                <input type="password" id="authToken" name="authToken" value="192.168.0.1" />
+              </div>
+              <div class="col-12 auth-field">
+                <label for="authCookie">Auth cookie</label>
+                <input type="password" id="authCookie" name="authCookie" value="192.168.0.1" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" id="saveSettings">Save Settings</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      const { ipcRenderer } = require("electron");
+
+      const form = document.getElementById("settingsForm");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const settings = {
+          modemIp: formData.get("modemIp"),
+          authToken: formData.get("authToken"),
+          authCookie: formData.get("authCookie"),
+        };
+
+        // Send settings to main process via IPC
+        ipcRenderer.send("save-settings", settings);
+      });
+
+      // Listen for settings loaded from main process
+      ipcRenderer.on("settings-loaded", (event, settings) => {
+        if (settings) {
+          document.getElementById("modemIp").value = settings.modemIp || "192.168.0.1";
+          document.getElementById("authToken").value = settings.authToken || "";
+          document.getElementById("authCookie").value = settings.authCookie || "";
+        }
+      });
+
+      // Request current settings when page loads
+      ipcRenderer.send("load-settings");
+    </script>
+  </body>
+</html>
