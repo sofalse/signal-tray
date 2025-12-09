@@ -1,4 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import { exit } from "process";
+import path from "path";
+import { fileURLToPath } from "url";
 import { app, Tray, Menu, BrowserWindow, Notification, ipcMain } from "electron/main";
 import { nativeImage } from "electron/common";
 import dayjs from "dayjs";
@@ -17,18 +20,21 @@ import { modemRequest } from "./util/axios.js";
 
 dayjs.extend(customParseFormat);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 let tray = null;
 let settings;
 let mainLoopInterval = null;
 
 let settingsWindow = null;
 
-const noReception = nativeImage.createFromPath("assets/icons/none.png");
-const oneBarIcon = nativeImage.createFromPath("assets/icons/1bar.png");
-const twoBarIcon = nativeImage.createFromPath("assets/icons/2bar.png");
-const threeBarIcon = nativeImage.createFromPath("assets/icons/3bar.png");
-const fourBarIcon = nativeImage.createFromPath("assets/icons/4bar.png");
-const disabledIcon = nativeImage.createFromPath("assets/icons/disabled.png");
+const noReception = nativeImage.createFromPath(path.join(__dirname, "assets/icons/none.png"));
+const oneBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/1bar.png"));
+const twoBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/2bar.png"));
+const threeBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/3bar.png"));
+const fourBarIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/4bar.png"));
+const disabledIcon = nativeImage.createFromPath(path.join(__dirname, "assets/icons/disabled.png"));
 
 const iconMap = {
   0: noReception,
@@ -50,6 +56,7 @@ function createWindow() {
     height: 400,
     resizable: false,
     show: false,
+    icon: "./images/icon.png",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,

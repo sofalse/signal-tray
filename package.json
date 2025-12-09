@@ -1,5 +1,6 @@
 {
   "name": "signal-tray",
+  "productName": "Signal Tray",
   "version": "1.0.0",
   "description": "Tray application for showing cellular modem signal strength",
   "main": "index.js",
@@ -8,6 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "make:self-signed": "electron-forge make --target=darwin -- --sign",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -26,8 +28,10 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "appdmg": "^0.6.6",
     "@electron-forge/cli": "^7.10.2",
     "@electron-forge/maker-deb": "^7.10.2",
+    "@electron-forge/maker-dmg": "^7.10.2",
     "@electron-forge/maker-rpm": "^7.10.2",
     "@electron-forge/maker-squirrel": "^7.10.2",
     "@electron-forge/maker-zip": "^7.10.2",
