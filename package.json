@@ -40,12 +40,6 @@
     "@electron-forge/publisher-github": "^7.10.2",
     "@electron/fuses": "^1.8.0",
     "@jest/globals": "^30.2.0",
-    "appdmg": {
-      "version": "^0.6.6",
-      "os": [
-        "darwin"
-      ]
-    },
     "electron": "^39.2.6",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -55,6 +49,15 @@
     "eslint-plugin-promise": "^7.2.1",
     "jest": "^30.2.0",
     "prettier": "^3.7.4"
+  },
+  "overrides": {
+    "os": {
+      "darwin": {
+        "devDependencies": {
+          "appdmg": "^0.6.6"
+        }
+      }
+    }
   },
   "dependencies": {
     "axios": "1.13.2",
