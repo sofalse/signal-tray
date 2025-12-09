@@ -40,7 +40,12 @@
     "@electron-forge/publisher-github": "^7.10.2",
     "@electron/fuses": "^1.8.0",
     "@jest/globals": "^30.2.0",
-    "appdmg": "^0.6.6",
+    "appdmg": {
+      "version": "^0.6.6",
+      "os": [
+        "darwin"
+      ]
+    },
     "electron": "^39.2.6",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
