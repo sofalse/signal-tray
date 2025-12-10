@@ -1,5 +1,6 @@
 # Signal tray
 
+![GitHub Release](https://img.shields.io/github/v/release/sofalse/signal-tray)
 [![codecov](https://codecov.io/github/sofalse/signal-tray/graph/badge.svg?token=K9ZT2X6DGT)](https://codecov.io/github/sofalse/signal-tray)
 [![CodeFactor](https://www.codefactor.io/repository/github/sofalse/signal-tray/badge)](https://www.codefactor.io/repository/github/sofalse/signal-tray)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
